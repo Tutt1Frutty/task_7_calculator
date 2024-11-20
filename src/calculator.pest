@@ -1,0 +1,18 @@
+WHITESPACE = _{ " " }
+
+integer = @{ ASCII_DIGIT+ }
+
+add = { "+" }
+subtract = { "-" }
+multiply = { "*" }
+divide = { "/" }
+modulo = { "%" }
+
+unary_minus = { "-" }
+
+expr = { atom ~ (bin_op ~ atom)* }
+atom = _{ unary_minus? ~ primary }
+primary = _{ integer | "(" ~ expr ~ ")" }
+bin_op = _{ add | subtract | multiply | divide | modulo }
+
+equation = { SOI ~ expr ~ EOI }
